@@ -1,13 +1,41 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <v-table
+    :users_data="USERS"
+    />
   </div>
 </template>
 
+<script>
+
+import {mapActions, mapGetters} from 'vuex'
+import vTable from './components/v-table'
+
+export default {
+  name: 'app',
+  components: {
+  vTable
+  },
+  data: () => {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'USERS'
+    ])
+  },
+  methods: {
+    ...mapActions([
+        'GET_USERS_FROM_API'
+    ])
+  },
+  mounted() {
+    this.GET_USERS_FROM_API()
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
